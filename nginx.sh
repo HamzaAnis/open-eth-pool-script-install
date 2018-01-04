@@ -15,3 +15,6 @@ ufw allow 'Nginx HTTP'
 ufw status
 echo -e "\033[32mStarting nginx service"
 systemctl start nginx
+echo -e "\033[32mEnabling nginx to run on reboot"
+systemctl enable nginx
+

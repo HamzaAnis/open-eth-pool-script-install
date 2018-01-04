@@ -6,8 +6,9 @@ git clone https://github.com/sammy007/open-ethereum-pool.git
 
 
 
-echo -e "\033[32mGoing to the directory"
-    cd open-ethereum-pool 
+echo -e "\033[32mMake can time as it will download the peckages\n"
+
+cd open-ethereum-pool && make
 # This is the config file
 
 echo -e "{
@@ -124,6 +125,5 @@ echo -e "{
 	\"newrelicKey\": \"SECRET_KEY\",
 	\"newrelicVerbose\": false
 }" > config.json
-make
 
 ./build/bin/open-ethereum-pool config.json

@@ -41,9 +41,7 @@ elif [ "$1" == "--remove" ]; then
 elif [ "$1" == "--help" ]; then
     print_help
     exit 0
-else
-    print_help
-    exit 1
+
 fi
 
 if [ -d "$HOME/.go" ] || [ -d "$HOME/go" ]; then

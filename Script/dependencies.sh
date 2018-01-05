@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # **********************************************************
 #                           GOLANG                         #
@@ -93,29 +92,27 @@ fi
 echo -e "Installing Node and Npm"
 
 if ! [ -x "$(command -v curl)" ]; then
-  echo 'Error: curl is not installed.' >&2
-  apt-get install curl
-  else
-  echo "Curl is Present"
+    echo 'Error: curl is not installed.' >&2
+    apt-get install curl
+else
+    echo "Curl is Present"
 fi
 
 
 if ! [ -x "$(command -v node)" ]; then
-# Installing build essentials
-apt-get install -y build-essential
-
-# Getting the lastest resource.
-curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-apt-get install -y nodejs
-
+    # Installing build essentials
+    apt-get install -y build-essential
+    
+    # Getting the lastest resource.
+    curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+    apt-get install -y nodejs
+    
 fi
 
 
 # Installing npm
-
-
 if ! [ -x "$(command -v curl)" ]; then
-apt-get install npm
+    apt-get install npm
 fi
 
 # **********************************************************
@@ -123,7 +120,7 @@ fi
 # **********************************************************
 
 echo -e "\033[32mInstalling nginx"
-get_update
+# get_update
 apt-get install nginx
 echo y | command
 

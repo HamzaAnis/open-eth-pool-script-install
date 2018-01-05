@@ -1,15 +1,12 @@
 #!/bin/bash
 
-#!/bin/bash
 
 
 git config --global http.https://gopkg.in.followRedirects true
 git clone https://github.com/sammy007/open-ethereum-pool.git
 
-
-
 echo -e "\033[32mMake can time as it will download the peckages\n"
-
+sudo chmod -R 777 .
 cd open-ethereum-pool && make
 # This is the config file
 

@@ -19,7 +19,7 @@ print_help() {
 
 get_update()
 {
-    apt-get update
+    sudo apt-get update
 }
 
 
@@ -56,34 +56,34 @@ fi
 
 if [ -d "$HOME/.go" ] || [ -d "$HOME/go" ]; then
     echo "The 'go' or '.go' directories already exist. Exiting."
-    exit 1
+else
+    echo "Downloading $DFILE ..."
+    wget https://storage.googleapis.com/golang/$DFILE -O /tmp/go.tar.gz
+    
+    if [ $? -ne 0 ]; then
+        echo "Download failed! Exiting."
+        exit 1
+    fi
+    
+    echo "Extracting File..."
+    tar -C "$HOME" -xzf /tmp/go.tar.gz
+    mv "$HOME/go" "$HOME/.go"
+    touch "$HOME/.${shell_profile}"
+    {
+        echo '# GoLang'
+        echo 'export GOROOT=$HOME/.go'
+        echo 'export PATH=$PATH:$GOROOT/bin'
+        echo 'export GOPATH=$HOME/go'
+        echo 'export PATH=$PATH:$GOPATH/bin'
+    } >> "$HOME/.${shell_profile}"
+    
+    mkdir -p $HOME/go/{src,pkg,bin}
+    echo -e "\nGo $VERSION was installed.\nMake sure to relogin into your shell or run:"
+    echo -e "\n\tsource $HOME/.${shell_profile}\n\nto update your environment variables."
+    echo "Tip: Opening a new terminal window usually just works. :)"
+    rm -f /tmp/go.tar.gz
 fi
 
-echo "Downloading $DFILE ..."
-wget https://storage.googleapis.com/golang/$DFILE -O /tmp/go.tar.gz
-
-if [ $? -ne 0 ]; then
-    echo "Download failed! Exiting."
-    exit 1
-fi
-
-echo "Extracting File..."
-tar -C "$HOME" -xzf /tmp/go.tar.gz
-mv "$HOME/go" "$HOME/.go"
-touch "$HOME/.${shell_profile}"
-{
-    echo '# GoLang'
-    echo 'export GOROOT=$HOME/.go'
-    echo 'export PATH=$PATH:$GOROOT/bin'
-    echo 'export GOPATH=$HOME/go'
-    echo 'export PATH=$PATH:$GOPATH/bin'
-} >> "$HOME/.${shell_profile}"
-
-mkdir -p $HOME/go/{src,pkg,bin}
-echo -e "\nGo $VERSION was installed.\nMake sure to relogin into your shell or run:"
-echo -e "\n\tsource $HOME/.${shell_profile}\n\nto update your environment variables."
-echo "Tip: Opening a new terminal window usually just works. :)"
-rm -f /tmp/go.tar.gz
 
 # **********************************************************
 #                           NPM                            #
@@ -92,6 +92,15 @@ rm -f /tmp/go.tar.gz
 
 echo -e "Installing Node and Npm"
 
+if ! [ -x "$(command -v curl)" ]; then
+  echo 'Error: curl is not installed.' >&2
+  apt-get install curl
+  else
+  echo "Curl is Present"
+fi
+
+
+if ! [ -x "$(command -v node)" ]; then
 # Installing build essentials
 apt-get install -y build-essential
 
@@ -99,16 +108,22 @@ apt-get install -y build-essential
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 apt-get install -y nodejs
 
+fi
+
+
 # Installing npm
+
+
+if ! [ -x "$(command -v curl)" ]; then
 apt-get install npm
+fi
 
 # **********************************************************
 #                           NGINX                          #
 # **********************************************************
 
-
-get_update
 echo -e "\033[32mInstalling nginx"
+get_update
 apt-get install nginx
 echo y | command
 
@@ -152,7 +167,7 @@ cd watchman
 git checkout v4.9.0  # the latest stable release
 ./autogen.sh
 ./configure
- make
+make
 sudo make install
 
 # Increasing limit for watchman

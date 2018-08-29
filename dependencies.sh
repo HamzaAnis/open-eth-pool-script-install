@@ -4,7 +4,7 @@
 #                           GOLANG                         #
 # **********************************************************
 
-VERSION="1.9.2"
+VERSION="1.10.3"
 
 print_help() {
     echo "Usage: bash goinstall.sh OPTIONS"

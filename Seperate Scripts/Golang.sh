@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-VERSION="1.10.3"
+VERSION="1.16.2"
 
 print_help() {
     echo "Usage: bash goinstall.sh OPTIONS"
@@ -16,20 +16,20 @@ print_help() {
 if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
     # assume Zsh
     shell_profile="zshrc"
-elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
+    elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
     # assume Bash
     shell_profile="bashrc"
 fi
 
 if [ "$1" == "--32" ]; then
     DFILE="go$VERSION.linux-386.tar.gz"
-elif [ "$1" == "--64" ]; then
+    elif [ "$1" == "--64" ]; then
     DFILE="go$VERSION.linux-amd64.tar.gz"
-elif [ "$1" == "--arm" ]; then
+    elif [ "$1" == "--arm" ]; then
     DFILE="go$VERSION.linux-armv6l.tar.gz"
-elif [ "$1" == "--darwin" ]; then
+    elif [ "$1" == "--darwin" ]; then
     DFILE="go$VERSION.darwin-amd64.tar.gz"
-elif [ "$1" == "--remove" ]; then
+    elif [ "$1" == "--remove" ]; then
     rm -rf "$HOME/.go/"
     sed -i '/# GoLang/d' "$HOME/.${shell_profile}"
     sed -i '/export GOROOT/d' "$HOME/.${shell_profile}"
@@ -38,10 +38,10 @@ elif [ "$1" == "--remove" ]; then
     sed -i '/:$GOPATH/d' "$HOME/.${shell_profile}"
     echo "Go removed."
     exit 0
-elif [ "$1" == "--help" ]; then
+    elif [ "$1" == "--help" ]; then
     print_help
     exit 0
-
+    
 fi
 
 if [ -d "$HOME/.go" ] || [ -d "$HOME/go" ]; then

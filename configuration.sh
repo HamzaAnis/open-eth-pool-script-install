@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 git config --global http.https://gopkg.in.followRedirects true
 git clone https://github.com/sammy007/open-ethereum-pool.git
 

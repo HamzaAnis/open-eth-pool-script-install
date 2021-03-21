@@ -95,18 +95,15 @@ if ! [ -x "$(command -v curl)" ]; then
     echo 'Error: curl is not installed.' >&2
     apt-get install curl
 else
-    echo "Curl is Present"
+    echo "curl is present"
 fi
-
 
 if ! [ -x "$(command -v node)" ]; then
     # Installing build essentials
     apt-get install -y build-essential
-    
     # Getting the lastest resource.
-    curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
     apt-get install -y nodejs
-    
 fi
 
 
@@ -152,18 +149,10 @@ systemctl enable redis-server.service
 
 
 # **********************************************************
-#                           Wacthman                       #
+#                          Watchman                        #
 # **********************************************************
 
-apt-get install -y autoconf automake build-essential python-dev libtool m4
-
-git clone https://github.com/facebook/watchman.git
-cd watchman
-git checkout v4.9.0  # the latest stable release
-./autogen.sh
-./configure
-make
-sudo make install
+apt-get install -y autoconf automake build-essential python-dev libtool m4 watchman
 
 # Increasing limit for watchman
 echo 999999 | sudo tee -a /proc/sys/fs/inotify/max_user_watches && echo 999999 | sudo tee -a /proc/sys/fs/inotify/max_queued_events && echo 999999 | sudo tee -a /proc/sys/fs/inotify/max_user_instances && watchman shutdown-server && sudo sysctl -p
@@ -207,6 +196,3 @@ systemctl enable geth.service
 
 echo -e '\033[1;92mStarting geth'
 screen geth --rpc --fast #syncing
-
-
-

@@ -18,7 +18,7 @@ print_help() {
 
 get_update()
 {
-    sudo apt-get update
+    apt-get update
 }
 
 
@@ -102,7 +102,7 @@ if ! [ -x "$(command -v node)" ]; then
     # Installing build essentials
     apt-get install -y build-essential
     # Getting the lastest resource.
-    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+    curl -sL https://deb.nodesource.com/setup_12.x | -E bash -
     apt-get install -y nodejs
 fi
 
@@ -155,7 +155,7 @@ systemctl enable redis-server.service
 apt-get install -y autoconf automake build-essential python-dev libtool m4 watchman
 
 # Increasing limit for watchman
-echo 999999 | sudo tee -a /proc/sys/fs/inotify/max_user_watches && echo 999999 | sudo tee -a /proc/sys/fs/inotify/max_queued_events && echo 999999 | sudo tee -a /proc/sys/fs/inotify/max_user_instances && watchman shutdown-server && sudo sysctl -p
+echo 999999 | tee -a /proc/sys/fs/inotify/max_user_watches && echo 999999 | tee -a /proc/sys/fs/inotify/max_queued_events && echo 999999 | tee -a /proc/sys/fs/inotify/max_user_instances && watchman shutdown-server && sysctl -p
 
 
 # **********************************************************

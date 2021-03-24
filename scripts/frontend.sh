@@ -8,12 +8,11 @@
 cd open-ethereum-pool
 cd www
 
-sudo npm install -g ember-cli@2.9.1
-sudo npm install ember-cli-cookie@0.2.0
-sudo npm install -g bower
-sudo npm install
+npm install -g ember-cli@2.9.1
+npm install ember-cli-cookie@0.2.0
+npm install -g bower
+npm install
 bower install
-sudo ./build.sh
+./build.sh
 
 ember server
-

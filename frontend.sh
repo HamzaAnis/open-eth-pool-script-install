@@ -19,4 +19,6 @@ sudo npm i intl-format-cache
 
 sudo ./build.sh
 
+sudo chmod -R 755 . #Bring Permission Levels Down to Appropriate Level
+
 sudo ember server

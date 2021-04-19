@@ -1,3 +1,5 @@
+![open-eth-pool-script-install](https://socialify.git.ci/HamzaAnis/open-eth-pool-script-install/image?font=Inter&forks=1&issues=1&language=1&pulls=1&stargazers=1&theme=Light)
+
 # Open Ethereum Pool Script for  configuration/setup and installation
 
 This repository will help you to install [open-ethereum-pool][repo]
